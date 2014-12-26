@@ -44,4 +44,6 @@ namespace Sane
 	);
 
 	public Status init(out Int version_code, AuthorizationCallback authorize);
+
+	public void exit();
 }
