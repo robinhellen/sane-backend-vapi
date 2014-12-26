@@ -33,8 +33,21 @@ namespace Sane
 	[CCode(has_type_id = false)]
 	public class String : GLib.string{}
 
+	[SimpleType]
+	[BooleanType]
+	public struct Bool {}
+
 	[CCode(cname="SANE_String_Const", has_type_id = false)]
 	public class StringConst {}
+
+	[CCode(has_type_id = false)]
+	public struct Device
+	{
+		public StringConst name;
+		public StringConst vendor;
+		public StringConst model;
+		public StringConst type;
+	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
 	public delegate void AuthorizationCallback(
@@ -46,4 +59,6 @@ namespace Sane
 	public Status init(out Int version_code, AuthorizationCallback authorize);
 
 	public void exit();
+
+	public Status get_devices([CCode(array_null_terminated = true)]out Device[] device_list, Bool local_only);
 }
