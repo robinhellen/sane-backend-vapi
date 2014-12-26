@@ -49,6 +49,17 @@ namespace Sane
 		public StringConst type;
 	}
 
+	[CCode(has_construct_function = false, has_copy_function = false, has_destroy_function = false, has_type_id = false)]
+	public class Handle
+	{
+		[CCode(cname="sane_open")]
+		public static Status open(StringConst name, out Handle h);
+
+		[CCode(cname="sane_close")]
+		[DestroysInstance]
+		public void close();
+	}
+
 	[CCode(cname="SANE_Authorization_Callback")]
 	public delegate void AuthorizationCallback(
 		StringConst resource,
