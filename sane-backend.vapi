@@ -24,4 +24,15 @@ namespace Sane
 	[IntegerType(rank = 6)] // defined to be a type that can hold from -2^31 to (2^31 - 1), equivalent to gint32
 	[CCode(has_type_id = false)]
 	public struct Int {}
+
+	[SimpleType]
+	[IntegerType(rank = 2)] // defined to be a type that can hold from 0 to (255), equivalent to gchar
+	[CCode(has_type_id = false)]
+	public struct Char {}
+
+	[CCode(has_type_id = false)]
+	public class String : GLib.string{}
+
+	[CCode(cname="SANE_String_Const", has_type_id = false)]
+	public class StringConst {}
 }
