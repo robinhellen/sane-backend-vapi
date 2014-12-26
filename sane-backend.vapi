@@ -35,4 +35,13 @@ namespace Sane
 
 	[CCode(cname="SANE_String_Const", has_type_id = false)]
 	public class StringConst {}
+
+	[CCode(cname="SANE_Authorization_Callback")]
+	public delegate void AuthorizationCallback(
+		StringConst resource,
+		[CCode(array_length_cexpr="SANE_MAX_USERNAME_LEN")]Char username[],
+		[CCode(array_length_cexpr="SANE_MAX_PASSWORD_LEN")]Char password[]
+	);
+
+	public Status init(out Int version_code, AuthorizationCallback authorize);
 }
