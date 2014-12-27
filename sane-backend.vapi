@@ -181,6 +181,9 @@ namespace Sane
 
 		[CCode(cname="sane_set_io_mode")]
 		public Status set_io_mode(Bool m);
+
+		[CCode(cname="sane_get_select_fd")]
+		public Status get_select_fd(out Int fd);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
