@@ -128,7 +128,7 @@ namespace Sane
 		public void close();
 
 		[CCode(cname="sane_get_option_descriptor")]
-		public OptionDescriptor get_option_descriptor(Int n);
+		public unowned OptionDescriptor get_option_descriptor(Int n);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
@@ -142,5 +142,5 @@ namespace Sane
 
 	public void exit();
 
-	public Status get_devices([CCode(array_null_terminated = true)]out Device[] device_list, Bool local_only);
+	public Status get_devices([CCode(array_null_terminated = true)]out unowned Device[] device_list, Bool local_only);
 }
