@@ -17,7 +17,10 @@ namespace Sane
 		COVER_OPEN,
 		IO_ERROR,
 		NO_MEM,
-		ACCESS_DENIED
+		ACCESS_DENIED;
+
+		[CCode(cname="sane_strstatus")]
+		public StringConst to_string();
 	}
 
 	[SimpleType]
