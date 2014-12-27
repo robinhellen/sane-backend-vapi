@@ -117,6 +117,14 @@ namespace Sane
 		STRING_LIST
 	}
 
+	[CCode(cprefix="ACTION_", has_type_id = false)]
+	public enum Action
+	{
+		GET_VALUE,
+		SET_VALUE,
+		SET_AUTO
+	}
+
 	[CCode(has_construct_function = false, has_copy_function = false, has_destroy_function = false, has_type_id = false)]
 	public class Handle
 	{
@@ -129,6 +137,9 @@ namespace Sane
 
 		[CCode(cname="sane_get_option_descriptor")]
 		public unowned OptionDescriptor get_option_descriptor(Int n);
+
+		[CCode(cname="sane_control_option")]
+		public Status control_option(Int n, Action a, void *v, out Int i);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
