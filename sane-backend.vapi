@@ -85,6 +85,17 @@ namespace Sane
 		Word quant;
 	}
 
+	[CCode(has_type_id = false)]
+	public struct Parameters
+	{
+		Frame format;
+		Bool last_frame;
+		Int bytes_per_line;
+		Int pixels_per_line;
+		Int lines;
+		Int depth;
+	}
+
 	[CCode(cname="SANE_Value_Type", cprefix="TYPE_", has_type_id = false)]
 	public enum ValueType
 	{
@@ -125,6 +136,16 @@ namespace Sane
 		SET_AUTO
 	}
 
+	[CCode(cprefix="FRAME_", has_type_id = false)]
+	public enum Frame
+	{
+		GRAY,
+		RGB,
+		RED,
+		GREEN,
+		BLUE
+	}
+
 	[CCode(has_construct_function = false, has_copy_function = false, has_destroy_function = false, has_type_id = false)]
 	public class Handle
 	{
@@ -140,6 +161,9 @@ namespace Sane
 
 		[CCode(cname="sane_control_option")]
 		public Status control_option(Int n, Action a, void *v, out Int i);
+
+		[CCode(cname="sane_get_parameters")]
+		public Status get_parameters(out Parameters p);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
