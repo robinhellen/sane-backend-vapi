@@ -174,7 +174,7 @@ namespace Sane
 		public Status start();
 
 		[CCode(cname="sane_read")]
-		public Status read(Byte[] buf, Int maxlen, out Int len);
+		public Status read([CCode(array_length_pos = 1.1)]Byte[] buf, out Int len);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
