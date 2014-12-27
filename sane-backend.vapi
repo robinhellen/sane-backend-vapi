@@ -34,6 +34,11 @@ namespace Sane
 	[SimpleType]
 	[IntegerType(rank = 2)] // defined to be a type that can hold from 0 to (255), equivalent to gchar
 	[CCode(has_type_id = false)]
+	public struct Byte {}
+
+	[SimpleType]
+	[IntegerType(rank = 2)] // defined to be a type that can hold from 0 to (255), equivalent to gchar
+	[CCode(has_type_id = false)]
 	public struct Char {}
 
 	[CCode(has_type_id = false)]
@@ -164,6 +169,12 @@ namespace Sane
 
 		[CCode(cname="sane_get_parameters")]
 		public Status get_parameters(out Parameters p);
+
+		[CCode(cname="sane_start")]
+		public Status start();
+
+		[CCode(cname="sane_read")]
+		public Status read(Byte[] buf, Int maxlen, out Int len);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
