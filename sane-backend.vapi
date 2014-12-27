@@ -175,6 +175,12 @@ namespace Sane
 
 		[CCode(cname="sane_read")]
 		public Status read([CCode(array_length_pos = 1.1)]Byte[] buf, out Int len);
+
+		[CCode(cname="sane_cancel")]
+		public void cancel();
+
+		[CCode(cname="sane_set_io_mode")]
+		public Status set_io_mode(Bool m);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
