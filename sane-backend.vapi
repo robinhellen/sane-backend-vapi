@@ -1,9 +1,9 @@
 /* sane-backend.vapi written by Robin Hellen */
 
-[CCode(cprefix="SANE_", lower_case_cprefix="sane_")]
+[CCode(cheader_filename="sane/sane.h", cprefix="SANE_", lower_case_cprefix="sane_")]
 namespace Sane
 {
-	[CCode (cprefix="STATUS_", has_type_id = false)]
+	[CCode (cprefix="SANE_STATUS_", has_type_id = false)]
 	public enum Status
 	{
 		GOOD,
@@ -27,7 +27,6 @@ namespace Sane
 	[IntegerType(rank = 6)] // basically defined to be a 32-bit type of some sort, undefined interpretation.
 	[CCode(has_type_id = false)]
 	public struct Word {}
-	}
 
 	[SimpleType]
 	[IntegerType(rank = 6)] // defined to be a type that can hold from -2^31 to (2^31 - 1), equivalent to gint32
@@ -45,14 +44,16 @@ namespace Sane
 	public struct Char {}
 
 	[CCode(has_type_id = false)]
-	public class String : GLib.string{}
+	[Compact]
+	public class String : string{}
 
 	[SimpleType]
 	[BooleanType]
 	public struct Bool {}
 
 	[CCode(cname="SANE_String_Const", has_type_id = false)]
-	public class StringConst {}
+	[PointerType]
+	public class StringConst : string {}
 
 	[CCode(has_type_id = false)]
 	public struct Device
@@ -189,14 +190,14 @@ namespace Sane
 		public Status get_select_fd(out Int fd);
 	}
 
-	[CCode(cname="SANE_Authorization_Callback")]
+	[CCode(cname="SANE_Authorization_Callback", has_target = false)]
 	public delegate void AuthorizationCallback(
 		StringConst resource,
 		[CCode(array_length_cexpr="SANE_MAX_USERNAME_LEN")]Char username[],
 		[CCode(array_length_cexpr="SANE_MAX_PASSWORD_LEN")]Char password[]
 	);
 
-	public Status init(out Int version_code, AuthorizationCallback authorize);
+	public Status init(out Int version_code, AuthorizationCallback? authorize);
 
 	public void exit();
 
