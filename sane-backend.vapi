@@ -21,6 +21,12 @@ namespace Sane
 	}
 
 	[SimpleType]
+	[IntegerType(rank = 6)] // basically defined to be a 32-bit type of some sort, undefined interpretation.
+	[CCode(has_type_id = false)]
+	public struct Word {}
+	}
+
+	[SimpleType]
 	[IntegerType(rank = 6)] // defined to be a type that can hold from -2^31 to (2^31 - 1), equivalent to gint32
 	[CCode(has_type_id = false)]
 	public struct Int {}
@@ -49,6 +55,68 @@ namespace Sane
 		public StringConst type;
 	}
 
+	[CCode(cname="SANE_Option_Descriptor", has_type_id = false)]
+	public struct OptionDescriptor
+	{
+		StringConst name;
+		StringConst title;
+		StringConst desc;
+		ValueType type;
+		Unit unit;
+		Int size;
+		Int cap;
+		ConstraintType constraint_type;
+
+		[CCode(array_null_terminated = true, cname="constraint.string_list")]
+		StringConst[] string_list;
+
+		[CCode(array_length = false, cname="constraint.word_list")] // Array length is first element of the array
+		Word[] word_list;
+
+		[CCode(cname="constraint.range")]
+		Range range;
+	}
+
+	[CCode(has_type_id = false)]
+	public struct Range
+	{
+		Word min;
+		Word max;
+		Word quant;
+	}
+
+	[CCode(cname="SANE_Value_Type", cprefix="TYPE_", has_type_id = false)]
+	public enum ValueType
+	{
+		BOOL,
+		INT,
+		FIXED,
+		STRING,
+		BUTTON,
+		GROUP
+	}
+
+	[CCode(cprefix="UNIT_", has_type_id = false)]
+	public enum Unit
+	{
+		NONE,
+		PIXEL,
+		BIT,
+		MM,
+		DPI,
+		PERCENT,
+		MICROSECOND
+	}
+
+	[CCode(cname="SANE_Constraint_Type", cprefix="CONSTRAINT_", has_type_id = false)]
+	public enum ConstraintType
+	{
+		NONE,
+		RANGE,
+		WORD_LIST,
+		STRING_LIST
+	}
+
 	[CCode(has_construct_function = false, has_copy_function = false, has_destroy_function = false, has_type_id = false)]
 	public class Handle
 	{
@@ -58,6 +126,9 @@ namespace Sane
 		[CCode(cname="sane_close")]
 		[DestroysInstance]
 		public void close();
+
+		[CCode(cname="sane_get_option_descriptor")]
+		public OptionDescriptor get_option_descriptor(Int n);
 	}
 
 	[CCode(cname="SANE_Authorization_Callback")]
