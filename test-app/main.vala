@@ -58,6 +58,12 @@ namespace TestApp
 
 		stderr.printf(@"There are $((int)option_count) options.\n");
 
+		for(int o = 0; o < option_count; o++)
+		{
+			var option = deviceHandle.get_option_descriptor(o);
+			stderr.printf(@"Option : $(option.name)");
+		}
+
 		deviceHandle.close();
 
 		exit();

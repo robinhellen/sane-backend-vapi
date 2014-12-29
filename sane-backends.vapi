@@ -73,23 +73,23 @@ namespace Sane
 	[SimpleType]
 	public class OptionDescriptor
 	{
-		unowned StringConst name;
-		unowned StringConst title;
-		unowned StringConst desc;
-		ValueType type;
-		Unit unit;
-		Int size;
-		Int cap;
-		ConstraintType constraint_type;
+		public unowned StringConst name;
+		public unowned StringConst title;
+		public unowned StringConst desc;
+		public ValueType type;
+		public Unit unit;
+		public Int size;
+		public Int cap;
+		public ConstraintType constraint_type;
 
 		[CCode(array_null_terminated = true, cname="constraint.string_list")]
-		unowned StringConst[] string_list;
+		public unowned StringConst[] string_list;
 
 		[CCode(array_length = false, cname="constraint.word_list")] // Array length is first element of the array
-		Word[] word_list;
+		public Word[] word_list;
 
 		[CCode(cname="constraint.range")]
-		Range range;
+		public Range range;
 	}
 
 	[CCode(has_type_id = false)]
