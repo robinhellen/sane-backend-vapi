@@ -20,7 +20,7 @@ namespace Sane
 		ACCESS_DENIED;
 
 		[CCode(cname="sane_strstatus")]
-		public StringConst to_string();
+		public unowned StringConst to_string();
 	}
 
 	[SimpleType]
@@ -56,17 +56,17 @@ namespace Sane
 		TRUE
 	}
 
-	[CCode(cname="SANE_String_Const", has_type_id = false)]
+	[CCode(cname="const SANE_Char", has_type_id = false)]
 	[PointerType]
 	public class StringConst : string {}
 
-	[CCode(cname="SANE_Device", has_type_id = false, ref_function = "", unref_function = "")]
+	[CCode(cname="SANE_Device", has_copy_function = false, has_destroy_function = false, has_type_id = false)]
 	public struct Device
 	{
-		public StringConst name;
-		public StringConst vendor;
-		public StringConst model;
-		public StringConst type;
+		public unowned StringConst name;
+		public unowned StringConst vendor;
+		public unowned StringConst model;
+		public unowned StringConst type;
 	}
 
 	[CCode(cname="SANE_Option_Descriptor", has_type_id = false)]
@@ -160,7 +160,7 @@ namespace Sane
 		BLUE
 	}
 
-	[CCode(has_construct_function = false, has_copy_function = false, has_destroy_function = false, has_type_id = false)]
+	[CCode(cname = "void", has_construct_function = false, has_type_id = false, ref_function = "", unref_function = "")]
 	public class Handle
 	{
 		[CCode(cname="sane_open")]

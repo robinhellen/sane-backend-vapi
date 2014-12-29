@@ -29,6 +29,21 @@ namespace TestApp
 			++i;
 		}
 
+		if(i == 0)
+		{
+			stderr.printf("No scanners found.\n");
+			return -1;
+		}
+
+		var default_device = devices[0];
+		Handle deviceHandle;
+		status = Handle.open(default_device.name, out deviceHandle);
+		if(status != Status.GOOD)
+		{
+			stderr.printf(@"Unable to open first scanner: $status\n");
+			return -2;
+		}
+
 		stderr.printf(@"Got $i devices.\n");
 		exit();
 		return 0;
