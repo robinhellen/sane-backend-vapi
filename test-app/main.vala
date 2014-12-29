@@ -34,6 +34,7 @@ namespace TestApp
 			stderr.printf("No scanners found.\n");
 			return -1;
 		}
+		stderr.printf(@"Got $i devices.\n");
 
 		var default_device = devices[0];
 		Handle deviceHandle;
@@ -44,7 +45,8 @@ namespace TestApp
 			return -2;
 		}
 
-		stderr.printf(@"Got $i devices.\n");
+		deviceHandle.close();
+
 		exit();
 		return 0;
 	}
