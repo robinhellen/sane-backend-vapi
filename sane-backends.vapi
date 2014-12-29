@@ -60,7 +60,7 @@ namespace Sane
 	[PointerType]
 	public class StringConst : string {}
 
-	[CCode(cname="SANE_Device *", has_type_id = false, ref_function = "", unref_function = "")]
+	[CCode(cname="SANE_Device", has_type_id = false, ref_function = "", unref_function = "")]
 	public struct Device
 	{
 		public StringConst name;
@@ -206,5 +206,5 @@ namespace Sane
 
 	public void exit();
 
-	public Status get_devices([CCode(array_null_terminated = true, array_length = false)]out unowned Device[] device_list, Bool local_only);
+	public Status get_devices([CCode(array_null_terminated = true, array_length = false)]out unowned Device?[] device_list, Bool local_only);
 }

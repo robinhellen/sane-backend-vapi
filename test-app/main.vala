@@ -13,7 +13,7 @@ namespace TestApp
 		}
 		stderr.printf(@"Successfully initialized library\n");
 
-		unowned Device[] devices = null;
+		unowned Device?[] devices = null;
 
 		status = get_devices(out devices, Bool.FALSE);
 		if(status != Status.GOOD)
@@ -22,7 +22,14 @@ namespace TestApp
 			return -1;
 		}
 
-		stderr.printf(@"Got devices.\n");
+		int i = 0;
+		while(devices[i] != null)
+		{
+			stderr.printf(@"found scanner: $(devices[i].name)\n");
+			++i;
+		}
+
+		stderr.printf(@"Got $i devices.\n");
 		exit();
 		return 0;
 	}
