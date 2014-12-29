@@ -143,7 +143,7 @@ namespace Sane
 		STRING_LIST
 	}
 
-	[CCode(cprefix="ACTION_", has_type_id = false)]
+	[CCode(cprefix="SANE_ACTION_", has_type_id = false)]
 	public enum Action
 	{
 		GET_VALUE,

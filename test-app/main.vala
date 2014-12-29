@@ -52,6 +52,12 @@ namespace TestApp
 			return -2;
 		}
 
+		Int option_count = 0;
+		Int bar;
+		deviceHandle.control_option(0, Action.GET_VALUE, &option_count, out bar);
+
+		stderr.printf(@"There are $((int)option_count) options.\n");
+
 		deviceHandle.close();
 
 		exit();
