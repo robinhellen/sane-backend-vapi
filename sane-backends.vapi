@@ -47,15 +47,20 @@ namespace Sane
 	[Compact]
 	public class String : string{}
 
-	[SimpleType]
-	[BooleanType]
-	public struct Bool {}
+	[CCode(has_type_id = false)]
+	public enum Bool
+	{
+		[CCode(cname="SANE_FALSE")]
+		FALSE,
+		[CCode(cname="SANE_TRUE")]
+		TRUE
+	}
 
 	[CCode(cname="SANE_String_Const", has_type_id = false)]
 	[PointerType]
 	public class StringConst : string {}
 
-	[CCode(has_type_id = false)]
+	[CCode(cname="SANE_Device *", has_type_id = false, ref_function = "", unref_function = "")]
 	public struct Device
 	{
 		public StringConst name;
@@ -201,5 +206,5 @@ namespace Sane
 
 	public void exit();
 
-	public Status get_devices([CCode(array_null_terminated = true)]out unowned Device[] device_list, Bool local_only);
+	public Status get_devices([CCode(array_null_terminated = true, array_length = false)]out unowned Device[] device_list, Bool local_only);
 }
