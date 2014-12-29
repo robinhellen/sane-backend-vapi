@@ -61,8 +61,10 @@ namespace TestApp
 		for(int o = 0; o < option_count; o++)
 		{
 			var option = deviceHandle.get_option_descriptor(o);
-			var name = option.name ?? (StringConst)"<unnamed>";
-			stderr.printf(@"Option : $name\n");
+			if(option.name == null)
+				stderr.printf("Unnamed option.\n");
+			else
+				stderr.printf(@"Option : $(option.name)\n");
 		}
 
 		deviceHandle.close();
