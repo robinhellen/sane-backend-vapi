@@ -62,9 +62,19 @@ namespace TestApp
 		{
 			var option = deviceHandle.get_option_descriptor(o);
 			if(option.name == null)
-				stderr.printf("Unnamed option.\n");
+			{
+				if(option.title == null)
+					stderr.printf("Unnamed option.\n");
+				else
+					stderr.printf(@"Unnamed option ($(option.title)).\n");
+			}
 			else
-				stderr.printf(@"Option : $(option.name)\n");
+			{
+				if(option.title == null)
+					stderr.printf(@"Option: $(option.name)\n");
+				else
+					stderr.printf(@"Option: $(option.name) ($(option.title))\n");
+			}
 		}
 
 		deviceHandle.close();
