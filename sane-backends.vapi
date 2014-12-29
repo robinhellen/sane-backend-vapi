@@ -69,12 +69,13 @@ namespace Sane
 		public unowned StringConst type;
 	}
 
-	[CCode(cname="SANE_Option_Descriptor", has_type_id = false)]
-	public struct OptionDescriptor
+	[CCode(cname="SANE_Option_Descriptor", has_type_id = false, ref_function = "", unref_function = "")]
+	[SimpleType]
+	public class OptionDescriptor
 	{
-		StringConst name;
-		StringConst title;
-		StringConst desc;
+		unowned StringConst name;
+		unowned StringConst title;
+		unowned StringConst desc;
 		ValueType type;
 		Unit unit;
 		Int size;
@@ -82,7 +83,7 @@ namespace Sane
 		ConstraintType constraint_type;
 
 		[CCode(array_null_terminated = true, cname="constraint.string_list")]
-		StringConst[] string_list;
+		unowned StringConst[] string_list;
 
 		[CCode(array_length = false, cname="constraint.word_list")] // Array length is first element of the array
 		Word[] word_list;

@@ -45,6 +45,13 @@ namespace TestApp
 			return -2;
 		}
 
+		var countDescriptor = deviceHandle.get_option_descriptor(0);
+		if(status != Status.GOOD)
+		{
+			stderr.printf(@"Unable to get first option descriptor: $status\n");
+			return -2;
+		}
+
 		deviceHandle.close();
 
 		exit();
