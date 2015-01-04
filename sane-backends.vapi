@@ -161,6 +161,15 @@ namespace Sane
         BLUE
     }
 
+    [CCode(cname="Int", cprefix="SANE_INFO_", has_type_id = false)]
+    [Flags]
+    public enum Info
+    {
+        INEXACT,
+        RELOAD_OPTIONS,
+        RELOAD_PARAMS
+    }
+
     [CCode(cname = "void", has_construct_function = false, has_type_id = false, ref_function = "", unref_function = "")]
     public class Handle
     {
