@@ -34,6 +34,21 @@ namespace Sane
     public struct Int {}
 
     [SimpleType]
+    [IntegerType(rank = 6)] // defined to be a type that can hold from -2^31 to (2^31 - 1), equivalent to gint32
+    [CCode(has_type_id = false)]
+    public struct Fixed
+    {
+        [CCode(cname="SANE_FIX")]
+        public static Fixed from_double(double d);
+
+        [CCode(cname="SANE_UNFIX")]
+        public double to_double();
+
+        [CCode(cname="SANE_FIXED_SCALE_SHIFT")]
+        public static int scale_shift;
+    }
+
+    [SimpleType]
     [IntegerType(rank = 2)] // defined to be a type that can hold from 0 to (255), equivalent to gchar
     [CCode(has_type_id = false)]
     public struct Byte {}
