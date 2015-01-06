@@ -94,7 +94,7 @@ namespace Sane
         public ValueType type;
         public Unit unit;
         public Int size;
-        public Int cap;
+        public Capability cap;
         public ConstraintType constraint_type;
 
         [CCode(array_null_terminated = true, cname="constraint.string_list")]
@@ -176,13 +176,32 @@ namespace Sane
         BLUE
     }
 
-    [CCode(cname="Int", cprefix="SANE_INFO_", has_type_id = false)]
+    [CCode(cname="SANE_Int", cprefix="SANE_INFO_", has_type_id = false)]
     [Flags]
     public enum Info
     {
         INEXACT,
         RELOAD_OPTIONS,
         RELOAD_PARAMS
+    }
+
+    [CCode(cname="SANE_Int", cprefix="SANE_CAP_", has_type_id = false)]
+    [Flags]
+    public enum Capability
+    {
+        SOFT_SELECT,
+        HARD_SELECT,
+        SOFT_DETECT,
+        EMULATED,
+        AUTOMATIC,
+        INACTIVE,
+        ADVANCED;
+
+        [CCode(cname="SANE_OPTION_IS_ACTIVE")]
+        public Bool is_active();
+
+        [CCode(cname="SANE_OPTION_IS_SETTABLE")]
+        public Bool is_settable();
     }
 
     [CCode(cname = "void", has_construct_function = false, has_type_id = false, ref_function = "", unref_function = "")]
