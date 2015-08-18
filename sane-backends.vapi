@@ -101,7 +101,7 @@ namespace Sane
         public unowned StringConst[] string_list;
 
         [CCode(array_length = false, cname="constraint.word_list")] // Array length is first element of the array
-        public Word[] word_list;
+        public unowned Word[] word_list;
 
         [CCode(cname="constraint.range")]
         public Range range;
@@ -137,7 +137,7 @@ namespace Sane
         GROUP
     }
 
-    [CCode(cprefix="UNIT_", has_type_id = false)]
+    [CCode(cprefix="SANE_UNIT_", has_type_id = false)]
     public enum Unit
     {
         NONE,
@@ -149,7 +149,7 @@ namespace Sane
         MICROSECOND
     }
 
-    [CCode(cname="SANE_Constraint_Type", cprefix="CONSTRAINT_", has_type_id = false)]
+    [CCode(cname="SANE_Constraint_Type", cprefix="SANE_CONSTRAINT_", has_type_id = false)]
     public enum ConstraintType
     {
         NONE,
