@@ -166,7 +166,7 @@ namespace Sane
         SET_AUTO
     }
 
-    [CCode(cprefix="FRAME_", has_type_id = false)]
+    [CCode(cprefix="SANE_FRAME_", has_type_id = false)]
     public enum Frame
     {
         GRAY,
